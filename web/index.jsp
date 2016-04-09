@@ -77,8 +77,55 @@
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
-                            <li class=""><a href="special_offer.html">Specials Offer</a></li>
-                            <li id="productMaintenance" class="" style="display:none" ><a href="#productMaintenancediv" style="color: #fff" role="button" data-toggle="modal" >Delivery</a></li>
+                            <li id=registerMaintenance" class="" ><a href="#registerMaintenancediv" style="color: #fff" role="button" data-toggle="modal">Register</a></li>
+                              <div id="registerMaintenancediv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 2% !important;margin-top: 100px !important;"  role="dialog" aria-labelledby="registerMaintenancediv" aria-hidden="false" >
+                                  <div class="modal-header" >
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3>New Customer Registration</h3>
+                                </div>
+                                <div class="modal-body" style="max-height: 700px !important;">
+                                    <form id="addNewCustomerForm" action="javascript:addNewCustomer()" class="form-horizontal loginFrm" style="margin-bottom: 1 !important;">
+                                        <div class="control-group">								
+                                             <label for="customer_id" class="control-label">Customer Id :</label> 
+                                             <div class="controls" ><input type="text" pattern="[0-9]{9}" title="Only Enter a 9 digit number" id="customer_id"  placeholder="SSN" required="true"></div>
+                                        </div>
+                                        <div class="control-group">								
+                                             <label for="customer_name" class="control-label" >Customer Name :</label>
+                                             <div class="controls"><input type="text" pattern="[a-zA-Z\s]+" title="Only Enter Alphabets" id="customer_name"  placeholder="Customer Name" required="true"></div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="customer_password" style="display:inline-block;vertical-align:left;">Customer Password :</label> <input  type="password"  id="customer_password" style="display:inline-block;vertical-align:right;" placeholder="Customer Password" required="true">
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="address_street" style="display:inline-block;vertical-align:left;">Street :</label> <input type="text" id="address_street" style="display:inline-block;vertical-align:right;" placeholder="Street" required="true">
+                                        </div>
+					<div class="control-group">
+                                            <label for="address_state" style="display:inline-block;vertical-align:middle;">State :</label> <input type="text" id="address_state" pattern="[a-zA-Z\s]+" style="display:inline-block;vertical-align:middle;" placeholder="State" required="true">
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="address_city" style="display:inline-block;vertical-align:middle;">City :</label> <input type="text" id="address_city" pattern="[a-zA-Z\s]+" style="display:inline-block;vertical-align:middle;" placeholder="City" required="true">
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="address_zipcode" style="display:inline-block;vertical-align:middle;">ZIP Code :</label> <input type="text" id="address_zipcode" pattern="[0-9]+" style="display:inline-block;vertical-align:middle;" placeholder="ZIP Code" required="true">
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="customer_kind" style="display:inline-block;vertical-align:middle;">Customer Kind :</label>
+                                            <select id="customer_kind">
+                                                    <option selected="selected" value="Home">Home</option>
+                                                    <option  value="Business">Business</option>
+                                            </select>
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="address_zipcode" style="display:inline-block;vertical-align:middle;">ZIP Code :</label> <input type="text" id="address_zipcode" pattern="[0-9]+" style="display:inline-block;vertical-align:middle;" placeholder="ZIP Code" required="true">
+                                                <label for="address_zipcode" style="display:inline-block;vertical-align:middle;">ZIP Code :</label> <input type="text" id="address_zipcode" pattern="[0-9]+" style="display:inline-block;vertical-align:middle;" placeholder="ZIP Code" required="true">
+                                                    <label for="address_zipcode" style="display:inline-block;vertical-align:middle;">ZIP Code :</label> <input type="text" id="address_zipcode" pattern="[0-9]+" style="display:inline-block;vertical-align:middle;" placeholder="ZIP Code" required="true">
+                                        </div>
+                                        <button type="submit" class="btn btn-success" >Submit</button>
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                    </form>		
+                                </div>
+                            </div>
+                            <li id="productMaintenance" class="" style="display:none" ><a href="#productMaintenancediv" style="color: #fff" role="button" data-toggle="modal" >New Product</a></li>
                             <div id="productMaintenancediv" class="modal hide fade in" tabindex="-1" style="width:700px;"  role="dialog" aria-labelledby="productMaintenancediv" aria-hidden="false" >
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -93,7 +140,7 @@
                                             <label for="product_name" style="display:inline-block;vertical-align:left;">Product Name :</label> <input  type="text"  id="product_name" style="display:inline-block;vertical-align:right;" placeholder="Product Name">
                                         </div>
                                         <div class="control-group">
-                                            <label for="product_description" style="display:inline-block;vertical-align:left;">Product Desciption :</label> <input type="text" id="product_description" style="display:inline-block;vertical-align:right;" placeholder="Product Desciption">
+                                            <label for="product_description" style="display:inline-block;vertical-align:left;">Product Description :</label> <input type="text" id="product_description" style="display:inline-block;vertical-align:right;" placeholder="Product Desciption">
                                         </div>
                                         <div class="control-group">
                                             <label for="inventory_amount" style="display:inline-block;vertical-align:middle;">Inventory Amount :</label> <input type="number" min="1" step="1" id="inventory_amount" style="display:inline-block;vertical-align:middle;" placeholder="Inventory Amount" required="true">
@@ -105,7 +152,7 @@
                                             <label for="product_kind" style="display:inline-block;vertical-align:middle;">Product Kind :</label> <input type="text" id="product_kind" style="display:inline-block;vertical-align:middle;" placeholder="Product Kind">
                                         </div>
                                         <div class="control-group">
-                                            <label for="image_url" style="display:inline-block;vertical-align:middle;">Image URL :</label><input type="text" id="image_url" style="display:inline-block;vertical-align:middle;" placeholder="Image URL">
+                                            <label for="image_url" style="display:inline-block;vertical-align:middle;">Image URL : </label> <input type="text" id="image_url" style="display:inline-block;vertical-align:middle;" placeholder="Image URL">
                                         </div>
                                         <button type="submit" class="btn btn-success" >Submit</button>
                                         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -115,7 +162,6 @@
                             <li class="" style="display:none"><a href="contact.html">Contact</a></li>
                             <li class="" id="logoutButton" style="display:block"><a href="#" onclick="logout()" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Logout</span></a></li>
                             <li id="loginButton" class="">
-
                                 <a href="#login" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Login</span></a>
                                 <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                     <div class="modal-header">
