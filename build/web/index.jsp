@@ -74,7 +74,7 @@
                                 <option>Mexican</option>
 
                             </select> 
-                            <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
+                            <button type="submit" id="submitButton" class="btn btn-primary" onclick="search()" >Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
                             <li id=registerMaintenance" class="" ><a href="#registerMaintenancediv" style="color: #fff" role="button" data-toggle="modal">Register</a></li>

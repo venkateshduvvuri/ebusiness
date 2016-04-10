@@ -66,6 +66,23 @@ public class ProductManagementServlet extends HttpServlet {
                 request.getSession().setAttribute("allProductsJSON", productsArray.toString());
                 out.println(productsArray.toString());
             }
+            if(requestType.equalsIgnoreCase("SearchProducts")){
+                conn = JNDIConnectionFactory.getConnectionFromJNDIPool();
+                ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.SEARCH_QUERY, null);
+                rs = QueryExecutor.executePSQuery(ps);
+                JSONArray productsArray = new JSONArray();
+                while(rs.next()){
+                    JSONObject productJSONObj = new JSONObject();
+                    productJSONObj.put("productName", rs.getString("NAME"));
+                    productJSONObj.put("productDescription", null == rs.getString("DESCRIPTION") ? "" : rs.getString("DESCRIPTION"));
+                    productJSONObj.put("productPrice", "$"+rs.getString("PRICE"));
+                    productJSONObj.put("url", null == rs.getString("IMAGE_URL") ? "" : rs.getString("IMAGE_URL"));
+                    productsArray.put(productJSONObj);
+                }
+                System.out.println("Final JSON ::: "+productsArray.toString());
+                request.getSession().setAttribute("allProductsJSON", productsArray.toString());
+                out.println(productsArray.toString());
+            }
         }
         catch(Exception ex){
             ex.printStackTrace();

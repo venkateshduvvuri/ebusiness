@@ -6,8 +6,8 @@
         maxActive="100"
         maxIdle="30"
         maxWait="10000"
-        username="root"
-        password="root123"
+        username="user1"
+        password="user1"
         driverClassName="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://localhost:3306/ebusiness"/>
+        url="jdbc:mysql://10.0.0.250:3306/ebusiness"/>
 </Context>
