@@ -27,6 +27,6 @@ public class GlobalConstants {
     
     public static final String ORDER_STATUS_READY = "Food Ready";
     
-   public static final String SEARCH_QUERY = "SELECT NAME,DESCRIPTION,PRICE,IMAGE_URL FROM PRODUCT WHERE INVENTORY_AMOUNT > 0 and UPPER(NAME) LIKE UPPER('%?%') ORDER BY NAME ASC";
+   public static final String SEARCH_QUERY = "SELECT NAME,DESCRIPTION,PRICE,IMAGE_URL FROM PRODUCT WHERE INVENTORY_AMOUNT > 0 and UPPER(NAME) LIKE UPPER(?) ORDER BY NAME ASC";
     
 }

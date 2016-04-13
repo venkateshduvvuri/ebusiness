@@ -66,7 +66,7 @@
                     <div class="navbar-inner">
                         <a class="brand" href="index.jsp"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
                         <form class="form-inline navbar-search" method="post" action="products.html" >
-                            <input id="srchFld" class="srchTxt" type="text" />
+                            <input id="srchFld" class="srchTxt" type="text" >
                             <select class="srchTxt">
                                 <option>ALL</option>
                                 <option>Indian</option>
@@ -74,16 +74,16 @@
                                 <option>Mexican</option>
 
                             </select> 
-                            <button type="submit" id="submitButton" class="btn btn-primary" onclick="search()" >Go</button>
+                            <button type="button" id="submitButton" class="btn btn-primary" onclick="search()" >Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
                             <li id=registerMaintenance" class="" ><a href="#registerMaintenancediv" style="color: #fff" role="button" data-toggle="modal">Register</a></li>
-                              <div id="registerMaintenancediv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 2% !important;margin-top: 100px !important;"  role="dialog" aria-labelledby="registerMaintenancediv" aria-hidden="false" >
+                              <div id="registerMaintenancediv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 1% !important;margin-top: 5px !important; overflow: auto !important"  role="dialog" aria-labelledby="registerMaintenancediv" aria-hidden="false" >
                                   <div class="modal-header" >
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                     <h3>New Customer Registration</h3>
                                 </div>
-                                <div class="modal-body" style="max-height: 700px !important;">
+                                <div class="modal-body" style="max-height: 700px !important;overflow: auto!important">
                                     <form id="addNewCustomerForm" action="javascript:addNewCustomer()" class="form-horizontal loginFrm" style="margin-bottom: 1 !important;">
                                         <div class="control-group">								
                                              <label for="customer_id" class="control-label">Customer Id :</label> 
@@ -255,7 +255,7 @@
                         <ul id="allProducts" class="thumbnails">
                             <li class="span3">
                                 <div class="thumbnail">
-                                    <a  href="product_details.jsp"><img src="themes/images/products/6.jpg" alt=""/></a>
+                                    <a  href="product_details.jsp"><img src="themes/images/products/1.jpg" alt=""/></a>
                                     <div class="caption">
                                         <h5>Product name</h5>
                                         <p> 
@@ -268,7 +268,7 @@
                             </li>
                             <li class="span3">
                                 <div class="thumbnail">
-                                    <a  href="product_details.jsp"><img src="themes/images/products/7.jpg" alt=""/></a>
+                                    <a  href="product_details.jsp"><img src="themes/images/products/2.jpg" alt=""/></a>
                                     <div class="caption">
                                         <h5>Product name</h5>
                                         <p> 
@@ -280,7 +280,7 @@
                             </li>
                             <li class="span3">
                                 <div class="thumbnail">
-                                    <a  href="product_details.jsp"><img src="themes/images/products/8.jpg" alt=""/></a>
+                                    <a  href="product_details.jsp"><img src="themes/images/products/3.jpg" alt=""/></a>
                                     <div class="caption">
                                         <h5>Product name</h5>
                                         <p> 
@@ -456,6 +456,7 @@
                 var myEvent = window.attachEvent || window.addEventListener;
                 var chkevent = window.attachEvent ? 'onbeforeunload' : 'beforeunload';
                 myEvent(chkevent, function (e) { // For >=IE7, Chrome, Firefox
+                    console.log("alertssjcjdjcbjdcbjdbcj");
                     document.cookie = "cart=" + escape(JSON.stringify(cart)) + "; " + "expires=Thu, 23 Jan 2025 00:00:01 UTC; path=/";
                     //document.cookie = "userid="+""+"; "+"expires=expires=Thu, 01 Jan 1970 00:00:01 GMT;";
                     flushCart();

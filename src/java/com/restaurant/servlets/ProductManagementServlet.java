@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -68,7 +69,10 @@ public class ProductManagementServlet extends HttpServlet {
             }
             if(requestType.equalsIgnoreCase("SearchProducts")){
                 conn = JNDIConnectionFactory.getConnectionFromJNDIPool();
+                System.out.println("Search Query ::: "+productRequestJSONObj.getString("searchQuery"));
+        
                 ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.SEARCH_QUERY, null);
+                ps.setString(1, "%"+productRequestJSONObj.getString("searchQuery")+"%");
                 rs = QueryExecutor.executePSQuery(ps);
                 JSONArray productsArray = new JSONArray();
                 while(rs.next()){
