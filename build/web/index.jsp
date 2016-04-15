@@ -78,7 +78,7 @@
                         </form>
                         <ul id="topMenu" class="nav pull-right">
                             <li id=registerMaintenance" class="" ><a href="#registerMaintenancediv" style="color: #fff" role="button" data-toggle="modal">Register</a></li>
-                              <div id="registerMaintenancediv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 1% !important;margin-top: 5px !important; overflow: auto !important"  role="dialog" aria-labelledby="registerMaintenancediv" aria-hidden="false" >
+                              <div id="registerMaintenancediv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 0% !important;margin-top: 5px !important;"  role="dialog" aria-labelledby="registerMaintenancediv" aria-hidden="false" >
                                   <div class="modal-header" >
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                     <h3>New Customer Registration</h3>
@@ -110,23 +110,25 @@
                                         </div>
                                         <div class="control-group">
                                             <label for="customer_kind" style="display:inline-block;vertical-align:middle;">Customer Kind :</label>
-                                            <select id="customer_kind">
+                                            <select id="customer_kind" onchange="home_business(this)">
                                                     <option selected="selected" value="Home">Home</option>
                                                     <option  value="Business">Business</option>
                                             </select>
                                         </div>
-                                        <div class="control-group">
-                                            <label for="address_zipcode" style="display:inline-block;vertical-align:middle;">ZIP Code :</label> <input type="text" id="address_zipcode" pattern="[0-9]+" style="display:inline-block;vertical-align:middle;" placeholder="ZIP Code" required="true">
-                                                <label for="address_zipcode" style="display:inline-block;vertical-align:middle;">ZIP Code :</label> <input type="text" id="address_zipcode" pattern="[0-9]+" style="display:inline-block;vertical-align:middle;" placeholder="ZIP Code" required="true">
-                                                    <label for="address_zipcode" style="display:inline-block;vertical-align:middle;">ZIP Code :</label> <input type="text" id="address_zipcode" pattern="[0-9]+" style="display:inline-block;vertical-align:middle;" placeholder="ZIP Code" required="true">
-                                        </div>
+                                        <div class="control-group" id="id_home_business" style="display: block">
+                                            <label for="marriage_status" style="display:inline-block;vertical-align:middle;">Marriage Status :</label> <input type="text" id="marriage_status"  style="display:inline-block;vertical-align:middle;" placeholder="Marriage Status" required="true">
+                                                <label for="gender" style="display:inline-block;vertical-align:middle;">Gender :</label> <input type="text" id="gender"  style="display:inline-block;vertical-align:middle;" placeholder="Gender" required="true">
+                                                    <label for="age" style="display:inline-block;vertical-align:middle;">Age :</label> <input type="text" id="age" style="display:inline-block;vertical-align:middle;" placeholder="Age" required="true">
+                                                    <label for="income" style="display:inline-block;vertical-align:middle;">Income :</label> <input type="text" id="income" style="display:inline-block;vertical-align:middle;" placeholder="Income" required="true">
+                                       </div>
+
                                         <button type="submit" class="btn btn-success" >Submit</button>
                                         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
                                     </form>		
                                 </div>
                             </div>
                             <li id="productMaintenance" class="" style="display:none" ><a href="#productMaintenancediv" style="color: #fff" role="button" data-toggle="modal" >New Product</a></li>
-                            <div id="productMaintenancediv" class="modal hide fade in" tabindex="-1" style="width:700px;"  role="dialog" aria-labelledby="productMaintenancediv" aria-hidden="false" >
+                            <div id="productMaintenancediv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 0% !important;margin-top: 5px !important;"  role="dialog" aria-labelledby="productMaintenancediv" aria-hidden="false" >
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                                     <h3>Add New Product</h3>

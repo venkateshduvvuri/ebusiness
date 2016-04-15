@@ -256,8 +256,8 @@
                                     <td id="totalTax"> </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" style="text-align:right" ><strong>TOTAL ($228 - $50 + $31) =</strong></td>
-                                    <td class="label label-important" style="display:block"> <strong> $155.00 </strong></td>
+                                    <td colspan="5" style="text-align:right" ><strong>TOTAL = </strong></td>
+                                    <td id="totalCost" class="label label-important" style="display:block"> </td>
                                 </tr>
                             </tbody>
                         </table>
@@ -411,7 +411,7 @@
                 }
                 cartRow += "<tr><td colspan=\"5\" style=\"text-align:right\">Total Price: </td><td id=\"totalvalue\"> </td></tr>";
                 cartRow += "<tr><td colspan=\"5\" style=\"text-align:right\" >Total Tax: </td><td id=\"totalTax\"> </td></tr>";
-                cartRow += "<tr><td colspan=\"5\" style=\"text-align:right\" ><strong>TOTAL ($228 - $50 + $31) =</strong></td><td class=\"label label-important\" style=\"display:block\"> <strong> $155.00 </strong></td></tr>";
+                cartRow += "<tr><td colspan=\"5\" style=\"text-align:right\" ><strong>TOTAL =</strong></td><td id=\"totalCost\" class=\"label label-important\" style=\"display:block\"> </td></tr>";
                 document.getElementById("cartGrid").innerHTML = cartRow;
             }
             renderCartGrid();

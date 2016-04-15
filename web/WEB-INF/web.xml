@@ -21,6 +21,10 @@
         <servlet-name>RedirectServlet</servlet-name>
         <servlet-class>com.restaurant.servlets.RedirectServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CustomerInfoServlet</servlet-name>
+        <servlet-class>com.restaurant.servlets.CustomerInfoServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -46,6 +50,10 @@
     <servlet-mapping>
         <servlet-name>RedirectServlet</servlet-name>
         <url-pattern>/RedirectServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CustomerInfoServlet</servlet-name>
+        <url-pattern>/CustomerInfoServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

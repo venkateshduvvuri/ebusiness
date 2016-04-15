@@ -24,10 +24,12 @@ public class UserBean {
     
     private String userName;
     
+    private String userId;
+    
     private String password;
 
-    public UserBean(String userName, String password) {
-        this.userName = userName;
+    public UserBean(String userId, String password) {
+        this.userId = userId;
         this.password = password;
     }
 
@@ -42,12 +44,21 @@ public class UserBean {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+       
     
     public boolean login(){
         Connection conn = JNDIConnectionFactory.getConnectionFromJNDIPool();
         String query = GlobalConstants.USER_LOGIN_QUERY;
         String[][] params = {
-            {String.valueOf(Types.VARCHAR),this.userName},
+            {String.valueOf(Types.VARCHAR),this.userId},
             {String.valueOf(Types.VARCHAR),this.password}
         };
         PreparedStatement ps = QueryExecutor.getPreparedStatement(conn, query, params);
@@ -55,16 +66,17 @@ public class UserBean {
         try {
             while(rs.next()){
                 System.out.println("Login Successful for the user ::: "+this.userName);
+                this.setUserName(rs.getString("CUSTOMER_NAME"));
                 return true;
             }
         } catch (SQLException ex) {
-            System.out.println("Login failed for the user ::: "+this.userName);
+            System.out.println("Login failed for the userId ::: "+this.userId);
             ex.printStackTrace();
         }
         finally{
             QueryExecutor.closeObjects(rs, ps, conn);
         }
-        System.out.println("Login failed for the user ::: "+this.userName);
+        System.out.println("Login failed for the userId ::: "+this.userId);
         return false;
     }
 }

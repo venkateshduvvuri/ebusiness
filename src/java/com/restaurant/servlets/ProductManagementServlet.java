@@ -57,17 +57,18 @@ public class ProductManagementServlet extends HttpServlet {
                 JSONArray productsArray = new JSONArray();
                 while(rs.next()){
                     JSONObject productJSONObj = new JSONObject();
-                    productJSONObj.put("productName", rs.getString("NAME"));
-                    productJSONObj.put("productDescription", null == rs.getString("DESCRIPTION") ? "" : rs.getString("DESCRIPTION"));
-                    productJSONObj.put("productPrice", "$"+rs.getString("PRICE"));
+                    productJSONObj.put("productName", rs.getString("PRODUCT_NAME"));
+                    productJSONObj.put("productDescription", null == rs.getString("PRODUCT_DESCRIPTION") ? "" : rs.getString("PRODUCT_DESCRIPTION"));
+                    productJSONObj.put("productPrice", "$"+rs.getString("PRODUCT_PRICE"));
                     productJSONObj.put("url", null == rs.getString("IMAGE_URL") ? "" : rs.getString("IMAGE_URL"));
+                    productJSONObj.put("inventory_amount", rs.getString("INVENTORY_AMOUNT"));
                     productsArray.put(productJSONObj);
                 }
                 System.out.println("Final JSON ::: "+productsArray.toString());
                 request.getSession().setAttribute("allProductsJSON", productsArray.toString());
                 out.println(productsArray.toString());
             }
-            if(requestType.equalsIgnoreCase("SearchProducts")){
+            else if(requestType.equalsIgnoreCase("SearchProducts")){
                 conn = JNDIConnectionFactory.getConnectionFromJNDIPool();
                 System.out.println("Search Query ::: "+productRequestJSONObj.getString("searchQuery"));
         
@@ -77,10 +78,11 @@ public class ProductManagementServlet extends HttpServlet {
                 JSONArray productsArray = new JSONArray();
                 while(rs.next()){
                     JSONObject productJSONObj = new JSONObject();
-                    productJSONObj.put("productName", rs.getString("NAME"));
-                    productJSONObj.put("productDescription", null == rs.getString("DESCRIPTION") ? "" : rs.getString("DESCRIPTION"));
-                    productJSONObj.put("productPrice", "$"+rs.getString("PRICE"));
+                    productJSONObj.put("productName", rs.getString("PRODUCT_NAME"));
+                    productJSONObj.put("productDescription", null == rs.getString("PRODUCT_DESCRIPTION") ? "" : rs.getString("PRODUCT_DESCRIPTION"));
+                    productJSONObj.put("productPrice", "$"+rs.getString("PRODUCT_PRICE"));
                     productJSONObj.put("url", null == rs.getString("IMAGE_URL") ? "" : rs.getString("IMAGE_URL"));
+                    productJSONObj.put("inventory_amount", rs.getString("INVENTORY_AMOUNT"));
                     productsArray.put(productJSONObj);
                 }
                 System.out.println("Final JSON ::: "+productsArray.toString());

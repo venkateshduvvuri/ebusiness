@@ -9,5 +9,5 @@
         username="user1"
         password="user1"
         driverClassName="com.mysql.jdbc.Driver"
-        url="jdbc:mysql://10.0.0.250:3306/ebusiness"/>
+        url="jdbc:mysql://localhost:3306/project_db"/>
 </Context>
