@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.sql.Types;
 
 
@@ -57,7 +58,7 @@ public class QueryExecutor {
     public static PreparedStatement getPreparedStatement(Connection conn, String query, String[][] params) {
         PreparedStatement ps;
         try{
-            ps = conn.prepareStatement(query);
+            ps = conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
             if(null != params){
                 for(int i=0; i < params.length; i++){
 

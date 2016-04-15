@@ -69,17 +69,23 @@ public class LoginServlet extends HttpServlet {
                     loginStatus = userBean.login();
                     userName = userBean.getUserName();
                 }
-                else if(userId.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")){
+                if(userId.equalsIgnoreCase("admin") && password.equalsIgnoreCase("admin")){
                     loginStatus = true;
                     userName = "admin";
                 }
                 if(loginStatus){
                     HttpSession session = request.getSession();
                     session.setAttribute("userName", userName);
+                    session.setAttribute("user", userId);
                     Cookie c = new Cookie("userid", userName);
                     c.setMaxAge(24*60*60);
                     c.setPath("/");
                     response.addCookie(c);
+                    
+                    Cookie c1 = new Cookie("user", userId);
+                    c1.setMaxAge(24*60*60);
+                    c1.setPath("/");
+                    response.addCookie(c1);
                     System.out.println("Login Successful");
                     out.println("Successful");
                 }
@@ -96,6 +102,13 @@ public class LoginServlet extends HttpServlet {
                         response.addCookie(c);
                     }
                     if (c.getName().equalsIgnoreCase("cart")) {
+                        System.out.println("Cookie found cart");
+                        c.setMaxAge(0);
+                        c.setValue(null);
+                        c.setPath("/");
+                        response.addCookie(c);
+                    }
+                    if (c.getName().equalsIgnoreCase("user")) {
                         System.out.println("Cookie found cart");
                         c.setMaxAge(0);
                         c.setValue(null);

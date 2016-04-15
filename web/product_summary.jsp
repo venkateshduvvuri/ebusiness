@@ -400,7 +400,7 @@
                     cartRow += "<td><img width=\"60\" src=\"" + cartToRender.orderdetails[i].url + "\" alt=\"\"/></td>";
                     cartRow += "<td>" + cartToRender.orderdetails[i].productname + "<br/>" + cartToRender.orderdetails[i].productname + "</td>";
                     cartRow += "<td><div class=\"input-append\">";
-                    cartRow += "<input class=\"span1\" style=\"max-width:34px;height:20px\" placeholder=\"1\" size=\"16\" type=\"text\" onkeypress=\"return false\"  value=\"" + cartToRender.orderdetails[i].quantity + "\">";
+                    cartRow += "<input class=\"span1\" style=\"max-width:34px;height:20px\" placeholder=\"1\" size=\""+cartToRender.orderdetails[i].inventory_amount+"\" type=\"text\" onkeypress=\"return false\"  value=\"" + cartToRender.orderdetails[i].quantity + "\">";
                     cartRow += "<button class=\"btn\" onclick=\"minus(this.parentNode)\" type=\"button\"><i class=\"icon-minus\"></i></button>";
                     cartRow += "<button class=\"btn\" onclick=\"plus(this.parentNode)\" type=\"button\"><i class=\"icon-plus\"></i></button>";
                     cartRow += "<button onclick=\"removeRow(this.parentNode)\" class=\"btn btn-danger\" type=\"button\"><i class=\"icon-remove icon-white\"></i></button>";

@@ -46,6 +46,11 @@ public class RedirectServlet extends HttpServlet {
                     
                     request.getSession().setAttribute("cartJSON", URLDecoder.decode(c.getValue(),"UTF-8"));
                 }
+                if (c.getName().equalsIgnoreCase("user")) {
+                    System.out.println("Cookie found user"+URLDecoder.decode(c.getValue(),"UTF-8"));
+                    
+                    request.getSession().setAttribute("user", c.getValue());
+                }
             }
         }
 

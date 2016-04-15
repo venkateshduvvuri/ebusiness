@@ -40,22 +40,24 @@ public class OrderRequestServlet extends HttpServlet {
         JSONObject orderJSON;
         try{
             orderJSON = new JSONObject(orderRequestJSON);
-            String userName = orderJSON.getString("usernname");
+            String userId = (String)request.getSession().getAttribute("user");
             JSONArray orderDetailsArray = orderJSON.getJSONArray("orderdetails");
             int items = orderDetailsArray.length();
             List<ProductDetails> productsList = new ArrayList<>();
             double orderAmount = 0;
             for(int i=0; i<items; i++){
                 String productName = orderDetailsArray.getJSONObject(i).getString("productname");
+                String productId = orderDetailsArray.getJSONObject(i).getString("productId");
                 int quantity = orderDetailsArray.getJSONObject(i).getInt("quantity");
                 double price = orderDetailsArray.getJSONObject(i).getDouble("price");
-                orderAmount = orderAmount + (price*quantity);
-                ProductDetails pd = new ProductDetails(productName, quantity, price);
+                orderAmount = orderAmount + (price*quantity) + 1.23;
+                ProductDetails pd = new ProductDetails(productId, productName, quantity, price);
                 productsList.add(pd);
             }
-            OrderRequest or = new OrderRequest(productsList, orderAmount, userName);
+            OrderRequest or = new OrderRequest(productsList, orderAmount, userId);
             if(or.placeOrder()){
-                out.println("Order has been Placed Succefully...");
+                System.out.println("Order has been Placed Succefully...");
+                out.println("Successful");
             }
         }
         catch(Exception ex){

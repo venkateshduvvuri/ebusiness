@@ -11,6 +11,7 @@ import com.restaurant.dbconnection.QueryExecutor;
 import com.restaurant.global.GlobalConstants;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.util.List;
@@ -38,19 +39,22 @@ public class OrderRequest {
     public boolean placeOrder() throws SQLException{
         long orderid = System.currentTimeMillis();
         String[][] params = {
-            {String.valueOf(Types.BIGINT),String.valueOf(orderid)},
             {String.valueOf(Types.VARCHAR),String.valueOf(this.userName)},
             {String.valueOf(Types.DATE),""},
-            {String.valueOf(Types.DOUBLE),String.valueOf(this.orderAmount)}
+            {String.valueOf(Types.DOUBLE),String.valueOf(this.orderAmount)},
+            {String.valueOf(Types.VARCHAR),GlobalConstants.SALES_ID}
         };
         Connection conn = JNDIConnectionFactory.getConnectionFromJNDIPool();
         PreparedStatement ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.ORDER_QUERY, params);
         if(QueryExecutor.executeQuery(ps)){
+            ResultSet rs =  ps.getGeneratedKeys();
+             rs.next();
+             int orderId = rs.getInt(1);
             QueryExecutor.closeObjects(null, ps, null);
             for(ProductDetails product : this.order){
                 String[][] queryParams = {
-                    {String.valueOf(Types.BIGINT),String.valueOf(orderid)},
-                    {String.valueOf(Types.VARCHAR),product.getProductName()},
+                    {String.valueOf(Types.INTEGER),String.valueOf(orderId)},
+                    {String.valueOf(Types.VARCHAR),String.valueOf(product.getProductId())},
                     {String.valueOf(Types.INTEGER),String.valueOf(product.getQuantity())},
                     {String.valueOf(Types.DOUBLE),String.valueOf(product.getPrice())},
                 };
@@ -66,8 +70,8 @@ public class OrderRequest {
             System.out.println("Order has been Placed Succefully...");
             conn.commit();
             QueryExecutor.closeObjects(null, null, conn);
-            Thread t = new Thread(new OrderUpdateThread(orderid));
-            t.start();
+            //Thread t = new Thread(new OrderUpdateThread(orderid));
+           // t.start();
             return true;
         }
         else{

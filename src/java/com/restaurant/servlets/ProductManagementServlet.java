@@ -62,6 +62,7 @@ public class ProductManagementServlet extends HttpServlet {
                     productJSONObj.put("productPrice", "$"+rs.getString("PRODUCT_PRICE"));
                     productJSONObj.put("url", null == rs.getString("IMAGE_URL") ? "" : rs.getString("IMAGE_URL"));
                     productJSONObj.put("inventory_amount", rs.getString("INVENTORY_AMOUNT"));
+                    productJSONObj.put("productId", rs.getString("PRODUCT_ID"));
                     productsArray.put(productJSONObj);
                 }
                 System.out.println("Final JSON ::: "+productsArray.toString());
@@ -83,6 +84,7 @@ public class ProductManagementServlet extends HttpServlet {
                     productJSONObj.put("productPrice", "$"+rs.getString("PRODUCT_PRICE"));
                     productJSONObj.put("url", null == rs.getString("IMAGE_URL") ? "" : rs.getString("IMAGE_URL"));
                     productJSONObj.put("inventory_amount", rs.getString("INVENTORY_AMOUNT"));
+                    productJSONObj.put("productId", rs.getString("PRODUCT_ID"));
                     productsArray.put(productJSONObj);
                 }
                 System.out.println("Final JSON ::: "+productsArray.toString());
