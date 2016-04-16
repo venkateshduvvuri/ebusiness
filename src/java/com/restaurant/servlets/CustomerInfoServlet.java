@@ -83,13 +83,20 @@ public class CustomerInfoServlet extends HttpServlet {
                 if(!QueryExecutor.executeQuery(homeBusinessPs)){
                     System.out.println("Error Inserting into Home or Business Table");
                     conn.rollback();
+                    out.println("Failed");
+                }
+                else{
+                    conn.commit();
+                    System.out.println("New Customer Added Successfully");
+                    out.println("Successful");
                 }
             }
             else{
                 System.out.println("Failed Adding a New Customer");
                 conn.rollback();
+                out.println("Failed");
             }
-            conn.commit();
+            
         }
         catch(Exception ex){
             ex.printStackTrace();

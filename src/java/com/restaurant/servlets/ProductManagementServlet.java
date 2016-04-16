@@ -13,6 +13,7 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.Types;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -50,8 +51,8 @@ public class ProductManagementServlet extends HttpServlet {
         try{
             productRequestJSONObj = new JSONObject(productRequestJSON);
             String requestType = productRequestJSONObj.getString("requestType");
+            conn = JNDIConnectionFactory.getConnectionFromJNDIPool();
             if(requestType.equalsIgnoreCase("FetchProducts")){
-                conn = JNDIConnectionFactory.getConnectionFromJNDIPool();
                 ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.PRODUCT_FETCH_QUERY, null);
                 rs = QueryExecutor.executePSQuery(ps);
                 JSONArray productsArray = new JSONArray();
@@ -70,7 +71,6 @@ public class ProductManagementServlet extends HttpServlet {
                 out.println(productsArray.toString());
             }
             else if(requestType.equalsIgnoreCase("SearchProducts")){
-                conn = JNDIConnectionFactory.getConnectionFromJNDIPool();
                 System.out.println("Search Query ::: "+productRequestJSONObj.getString("searchQuery"));
         
                 ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.SEARCH_QUERY, null);
@@ -90,6 +90,75 @@ public class ProductManagementServlet extends HttpServlet {
                 System.out.println("Final JSON ::: "+productsArray.toString());
                 request.getSession().setAttribute("allProductsJSON", productsArray.toString());
                 out.println(productsArray.toString());
+            }
+            else if(requestType.equalsIgnoreCase("AddNewProduct")){
+                JSONObject newProductJSONObj = productRequestJSONObj.getJSONObject("productJSON");
+                String[][] newProductParams = {
+                    {String.valueOf(Types.VARCHAR),newProductJSONObj.getString("product_id")},
+                    {String.valueOf(Types.VARCHAR),newProductJSONObj.getString("product_name")},
+                    {String.valueOf(Types.VARCHAR),newProductJSONObj.getString("product_description")},
+                    {String.valueOf(Types.VARCHAR),newProductJSONObj.getString("inventory_amount")},
+                    {String.valueOf(Types.VARCHAR),newProductJSONObj.getString("product_price")},
+                    {String.valueOf(Types.VARCHAR),newProductJSONObj.getString("product_kind")},
+                    {String.valueOf(Types.VARCHAR),newProductJSONObj.getString("image_url")}
+                };
+                
+
+                ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.ADD_NEW_PRODUCT, newProductParams);
+                if(QueryExecutor.executeQuery(ps)){
+                    System.out.println("New Product Added Successfully.");
+                    conn.commit();
+                    out.println("Successful");
+                }
+                else{
+                    System.out.println("Failed Adding New Product.");
+                    conn.rollback();
+                    out.println("Failed");
+                }
+                
+            }
+            else if(requestType.equalsIgnoreCase("SalesAggregate")){
+                 String aggregationType = productRequestJSONObj.getString("aggregationType");
+                 if(aggregationType.equalsIgnoreCase("SALES_BY_PRODUCT")){
+                    ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.SALES_BY_PRODUCT, null);
+                 }
+                 else if(aggregationType.equalsIgnoreCase("CATEGORY_TOP")){
+                     ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.CATEGORY_TOP, null);
+                 }    
+                 else if(aggregationType.equalsIgnoreCase("SALES_BY_REGION")){
+                     ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.SALES_BY_REGION, null);
+                 }
+                 else if(aggregationType.equalsIgnoreCase("MY_ORDERS")){
+                     ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.MY_ORDERS, null);
+                     ps.setString(1, (String)request.getSession().getAttribute("user"));
+                 } 
+                 rs = QueryExecutor.executePSQuery(ps);
+                 JSONArray aggregateJSONArray = new JSONArray();
+                 ResultSetMetaData rsmd = rs.getMetaData();
+                 int columnCount = rsmd.getColumnCount();
+                 
+                 JSONObject colNamesJSON = new JSONObject();
+                 JSONArray colnamesArray = new JSONArray();
+                 for(int i=1 ; i<columnCount+1; i++){
+                     colnamesArray.put(rsmd.getColumnLabel(i));
+                 }
+                 colNamesJSON.put("columnNames", colnamesArray);
+                 
+                 
+                 JSONObject colValuesJSON = new JSONObject();
+                 JSONArray colValuesArray = new JSONArray();
+                 while(rs.next()){
+                     JSONArray colValuesPerRow = new JSONArray();
+                     for(int j=1; j<columnCount+1; j++){
+                         colValuesPerRow.put(rs.getString(j));
+                     }
+                     colValuesArray.put(colValuesPerRow);
+                 }
+                 colValuesJSON.put("columnValues", colValuesArray);
+                 aggregateJSONArray.put(colNamesJSON);
+                 aggregateJSONArray.put(colValuesJSON);
+                 out.println(aggregateJSONArray.toString());
+                 System.out.println(aggregateJSONArray.toString());
             }
         }
         catch(Exception ex){

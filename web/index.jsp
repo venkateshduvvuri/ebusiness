@@ -77,6 +77,60 @@
                             <button type="button" id="submitButton" class="btn btn-primary" onclick="search()" >Go</button>
                         </form>
                         <ul id="topMenu" class="nav pull-right">
+                            <li id="myOrdersDialog" class="" style="display:none"><a href="#myOrdersdiv" onclick="salesAggregate('MY_ORDERS','myOrdersTable')" style="color: #fff" role="button" data-toggle="modal">My Orders</a></li>
+                             <div id="myOrdersdiv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 0% !important;margin-top: 5px !important;"  role="dialog" aria-labelledby="aggregationdiv" aria-hidden="false" >
+                                <div class="modal-header" >
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3>Aggregation Summary</h3>
+                                </div>
+                                <div class="modal-body" style="max-height: 700px !important;overflow: auto!important">
+                                    <table class="table table-bordered" id="myOrdersTable"> </table>
+                                </div>
+                            </div>
+                            <li id="aggregationDialog" style="display:none"><a href="#aggregationdiv"  style="color: #fff" role="button" data-toggle="modal">Aggregate</a></li>
+                            
+                            <div id="aggregationdiv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 0% !important;margin-top: 5px !important;"  role="dialog" aria-labelledby="aggregationdiv" aria-hidden="false" >
+                                <div class="modal-header" >
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3>Aggregation Summary</h3>
+                                </div>
+                                <div class="modal-body" style="max-height: 700px !important;overflow: auto!important">
+                                     <button type="submit" class="btn btn-success" onclick="salesAggregate('SALES_BY_PRODUCT','aggregationTable')">Product Sales</button>
+                                     <button type="submit" class="btn btn-success" onclick="salesAggregate('CATEGORY_TOP','aggregationTable')">Top Cat</button>
+                                     <button type="submit" class="btn btn-success" onclick="salesAggregate('SALES_BY_REGION','aggregationTable')">Region Sales</button>
+                        <table class="table table-bordered" id="aggregationTable">
+                            <!--<thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Description</th>
+                                    <th>Quantity/Update</th>
+                                </tr>
+                            </thead>
+                            <tbody id="aggregationValues">
+                                <tr>
+                                    <td>$120.00</td>
+
+                                    <td>$15.23</td>
+                                    <td >$120.00</td>
+                                </tr>
+                                <tr>
+                                    <td>$7.00</td>
+
+                                    <td>$1.00</td>
+                                    <td >$7.00</td>
+                                </tr>
+                                <tr>
+                                    <td>$120.00</td>
+
+                                    <td>$15.00</td>
+                                    <td >$120.00</td>
+                                </tr>
+
+                            </tbody>-->
+                        </table>
+                                </div>
+                            </div>
+                            
                             <li id=registerMaintenance" class="" ><a href="#registerMaintenancediv" style="color: #fff" role="button" data-toggle="modal">Register</a></li>
                               <div id="registerMaintenancediv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 0% !important;margin-top: 5px !important;"  role="dialog" aria-labelledby="registerMaintenancediv" aria-hidden="false" >
                                   <div class="modal-header" >
@@ -116,10 +170,12 @@
                                             </select>
                                         </div>
                                         <div class="control-group" id="id_home_business" style="display: block">
-                                            <label for="marriage_status" style="display:inline-block;vertical-align:middle;">Marriage Status :</label> <input type="text" id="marriage_status"  style="display:inline-block;vertical-align:middle;" placeholder="Marriage Status" required="true">
-                                                <label for="gender" style="display:inline-block;vertical-align:middle;">Gender :</label> <input type="text" id="gender"  style="display:inline-block;vertical-align:middle;" placeholder="Gender" required="true">
-                                                    <label for="age" style="display:inline-block;vertical-align:middle;">Age :</label> <input type="text" id="age" style="display:inline-block;vertical-align:middle;" placeholder="Age" required="true">
-                                                    <label for="income" style="display:inline-block;vertical-align:middle;">Income :</label> <input type="text" id="income" style="display:inline-block;vertical-align:middle;" placeholder="Income" required="true">
+                                            <label for="marriage_status" style="display:inline-block;vertical-align:middle;">Marriage Status :</label>
+                                             <select id="marriage_status" ><option selected="selected" value="Married">Married</option><option  value="Unmarried">Unmarried</option> <option  value="Widowed">Widowed</option><option  value="Separated">Separated</option></select>
+                                              <label for="gender" style="display:inline-block;vertical-align:middle;">Gender :</label>
+                                               <select id="gender"><option value="Male">Male</option><option value="Female">Female</option></select>
+                                                <label for="age" style="display:inline-block;vertical-align:middle;">Age :</label> <input type="number" id="age" min="1" step="1" style="display:inline-block;vertical-align:middle;" placeholder="Age" required="true">
+                                                <label for="income" style="display:inline-block;vertical-align:middle;">Income :</label> <input type="number" id="income" step="any" min="1" style="display:inline-block;vertical-align:middle;" placeholder="Income" required="true">
                                        </div>
 
                                         <button type="submit" class="btn btn-success" >Submit</button>
@@ -139,19 +195,25 @@
                                              <label for="product_id" style="display:inline-block;vertical-align:middle;">Product ID :</label> <input type="text" pattern="[a-zA-Z0-9-]+" title="Only Enter AlphaNumeric Value" id="product_id" style="display:inline-block;vertical-align:middle;"    placeholder="Product ID :" required="true" >
                                         </div>
                                         <div class="control-group">
-                                            <label for="product_name" style="display:inline-block;vertical-align:left;">Product Name :</label> <input  type="text"  id="product_name" style="display:inline-block;vertical-align:right;" placeholder="Product Name">
+                                            <label for="product_name" style="display:inline-block;vertical-align:left;">Product Name :</label> <input  type="text"  id="product_name" style="display:inline-block;vertical-align:right;" placeholder="Product Name" required="true">
                                         </div>
                                         <div class="control-group">
-                                            <label for="product_description" style="display:inline-block;vertical-align:left;">Product Description :</label> <input type="text" id="product_description" style="display:inline-block;vertical-align:right;" placeholder="Product Desciption">
+                                            <label for="product_description" style="display:inline-block;vertical-align:left;">Product Description :</label> <input type="text" id="product_description" style="display:inline-block;vertical-align:right;" placeholder="Product Desciption" required="true">
                                         </div>
                                         <div class="control-group">
                                             <label for="inventory_amount" style="display:inline-block;vertical-align:middle;">Inventory Amount :</label> <input type="number" min="1" step="1" id="inventory_amount" style="display:inline-block;vertical-align:middle;" placeholder="Inventory Amount" required="true">
                                         </div>
                                         <div class="control-group">
-                                            <label for="product_price" style="display:inline-block;vertical-align:middle;">Product Price :</label> <input type="number" step="any" min="0" id="product_price" style="display:inline-block;vertical-align:middle;" placeholder="Product Price">
+                                            <label for="product_price" style="display:inline-block;vertical-align:middle;">Product Price :</label> <input type="number" step="any" min="0" id="product_price" style="display:inline-block;vertical-align:middle;" placeholder="Product Price" required="true">
                                         </div>
                                         <div class="control-group">
-                                            <label for="product_kind" style="display:inline-block;vertical-align:middle;">Product Kind :</label> <input type="text" id="product_kind" style="display:inline-block;vertical-align:middle;" placeholder="Product Kind">
+                                            <label for="product_kind" style="display:inline-block;vertical-align:middle;">Product Kind :</label> 
+                                            <select id="product_kind">
+                                                <option value="Computer">Computer</option>
+                                                <option value="Mobile">Mobile</option>
+                                                <option value="Tablet">Tablet</option>
+                                            </select>
+                                            <!--<input type="text" id="product_kind" style="display:inline-block;vertical-align:middle;" placeholder="Product Kind" required="true">-->
                                         </div>
                                         <div class="control-group">
                                             <label for="image_url" style="display:inline-block;vertical-align:middle;">Image URL : </label> <input type="text" id="image_url" style="display:inline-block;vertical-align:middle;" placeholder="Image URL">
@@ -446,10 +508,12 @@
                     document.getElementById("productMaintenance").style.display = "block";
                     document.getElementById("loginButton").style.display = "none";
                     document.getElementById("logoutButton").style.display = "block";
+                    document.getElementById("aggregationDialog").style.display = "block";
                     document.getElementById("userHeader").innerHTML = "Welcome!<strong> Administrator</strong>";
                 } else {
                     document.getElementById("loginButton").style.display = "none";
                     document.getElementById("logoutButton").style.display = "block";
+                    document.getElementById("myOrdersDialog").style.display = "block";
                     document.getElementById("userHeader").innerHTML = "Welcome!<strong> " + username.toString().trim() + "</strong>";
                 }
                 fetchProducts();
