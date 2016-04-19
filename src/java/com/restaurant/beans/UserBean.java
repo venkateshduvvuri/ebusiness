@@ -13,8 +13,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -65,8 +63,8 @@ public class UserBean {
         ResultSet rs = QueryExecutor.executePSQuery(ps);
         try {
             while(rs.next()){
-                System.out.println("Login Successful for the user ::: "+this.userName);
                 this.setUserName(rs.getString("CUSTOMER_NAME"));
+                System.out.println("Login Successful for the user ::: "+this.userName);
                 return true;
             }
         } catch (SQLException ex) {

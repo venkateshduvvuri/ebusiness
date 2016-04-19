@@ -50,7 +50,7 @@ public class OrderRequestServlet extends HttpServlet {
                 String productId = orderDetailsArray.getJSONObject(i).getString("productId");
                 int quantity = orderDetailsArray.getJSONObject(i).getInt("quantity");
                 double price = orderDetailsArray.getJSONObject(i).getDouble("price");
-                orderAmount = orderAmount + (price*quantity) + 1.23;
+                orderAmount = orderAmount + (price*quantity);
                 ProductDetails pd = new ProductDetails(productId, productName, quantity, price);
                 productsList.add(pd);
             }

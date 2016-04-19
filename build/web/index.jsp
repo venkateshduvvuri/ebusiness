@@ -49,9 +49,9 @@
                     <div class="span6">
                         <div class="pull-right">
 
-                            <a href="product_summary.jsp"><span>&pound;</span></a>
+                           <!-- <a href="product_summary.jsp"><span>&pound;</span></a>
                             <span class="btn btn-mini">$155.00</span>
-                            <a href="product_summary.jsp"><span class="">$</span></a>
+                            <a href="product_summary.jsp"><span class="">$</span></a>-->
                             <a href="product_summary.jsp"><span id="cartSize" class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ 3 ] Items in your cart </span> </a> 
                         </div>
                     </div>
@@ -64,14 +64,14 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index.jsp"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
-                        <form class="form-inline navbar-search" method="post" action="products.html" >
+                        <a class="brand" href="index.jsp"><img src="themes/images/logo.png" alt="Bootsshop" height="20"/></a>
+                        <form class="form-inline navbar-search" method="post">
                             <input id="srchFld" class="srchTxt" type="text" >
-                            <select class="srchTxt">
+                            <select class="srchTxt" id="searchCat">
                                 <option>ALL</option>
-                                <option>Indian</option>
-                                <option>Chinese </option>
-                                <option>Mexican</option>
+                                <option>Computer</option>
+                                <option>Mobile</option>
+                                <option>Tablet</option>
 
                             </select> 
                             <button type="button" id="submitButton" class="btn btn-primary" onclick="search()" >Go</button>
@@ -81,7 +81,7 @@
                              <div id="myOrdersdiv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 0% !important;margin-top: 5px !important;"  role="dialog" aria-labelledby="aggregationdiv" aria-hidden="false" >
                                 <div class="modal-header" >
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Aggregation Summary</h3>
+                                    <h3>My Previous Orders</h3>
                                 </div>
                                 <div class="modal-body" style="max-height: 700px !important;overflow: auto!important">
                                     <table class="table table-bordered" id="myOrdersTable"> </table>
@@ -240,11 +240,11 @@
                                             <div class="control-group">
                                                 <input type="password" id="inputPassword" placeholder="Password">
                                             </div>
-                                            <div class="control-group">
+                                           <!-- <div class="control-group">
                                                 <label class="checkbox">
                                                     <input type="checkbox"> Remember me
                                                 </label>
-                                            </div>
+                                            </div>-->
                                         </form>		
                                         <button type="submit" class="btn btn-success" onclick="login()" >Sign in</button>
                                         <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
@@ -262,7 +262,7 @@
             <div class="container">
                 <div class="row">
                     <!-- Sidebar ================================================== -->
-                    <div id="sidebar" class="span3">
+                    <div id="sidebar" class="span3" style="display:none !important">
                         <div class="well well-small"><a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                             <li class="subMenu open"><a> Indian</a>
@@ -317,7 +317,7 @@
                     <div class="span9">		
 
                         <ul id="allProducts" class="thumbnails">
-                            <li class="span3">
+                           <!-- <li class="span3">
                                 <div class="thumbnail">
                                     <a  href="product_details.jsp"><img src="themes/images/products/1.jpg" alt=""/></a>
                                     <div class="caption">
@@ -389,7 +389,7 @@
                                         <h4 style="text-align:center"><a class="btn" href="product_details.jsp"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">$222.00</a></h4>
                                     </div>
                                 </div>
-                            </li>
+                            </li>-->
                         </ul>	
                     </div>
                 </div>
@@ -398,7 +398,7 @@
         <!-- Footer ================================================================== -->
 
 
-        <div  id="footerSection">
+        <div  id="footerSection" style="display: none">
             <div class="container">
                 <div class="row">
                     <div class="span3">
@@ -522,7 +522,6 @@
                 var myEvent = window.attachEvent || window.addEventListener;
                 var chkevent = window.attachEvent ? 'onbeforeunload' : 'beforeunload';
                 myEvent(chkevent, function (e) { // For >=IE7, Chrome, Firefox
-                    console.log("alertssjcjdjcbjdcbjdbcj");
                     document.cookie = "cart=" + escape(JSON.stringify(cart)) + "; " + "expires=Thu, 23 Jan 2025 00:00:01 UTC; path=/";
                     //document.cookie = "userid="+""+"; "+"expires=expires=Thu, 01 Jan 1970 00:00:01 GMT;";
                     flushCart();

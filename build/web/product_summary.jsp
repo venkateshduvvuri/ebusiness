@@ -53,9 +53,9 @@
                     <div id="userHeader" class="span6">Welcome!<strong> User</strong></div>
                     <div class="span6">
                         <div class="pull-right">
-                            <a href="product_summary.jsp"><span>&pound;</span></a>
+                            <!--<a href="product_summary.jsp"><span>&pound;</span></a>
                             <span class="btn btn-mini">$155.00</span>
-                            <a href="product_summary.jsp"><span class="">$</span></a>
+                            <a href="product_summary.jsp"><span class="">$</span></a>-->
                             <a href="product_summary.jsp"><span id="cartSize" class="btn btn-mini btn-primary"><i class="icon-shopping-cart icon-white"></i> [ ] Items in your cart </span> </a> 
                         </div>
                     </div>
@@ -72,12 +72,10 @@
                         <form class="form-inline navbar-search" method="post" action="products.html" >
                             <input id="srchFld" class="srchTxt" type="text" />
                             <select class="srchTxt">
-                                <option>All</option>
-                                <option>CLOTHES </option>
-                                <option>FOOD AND BEVERAGES </option>
-                                <option>HEALTH & BEAUTY </option>
-                                <option>SPORTS & LEISURE </option>
-                                <option>BOOKS & ENTERTAINMENTS </option>
+                                 <option>ALL</option>
+                                <option>Computer</option>
+                                <option>Mobile</option>
+                                <option>Tablet</option>
                             </select> 
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
@@ -122,7 +120,7 @@
             <div class="container">
                 <div class="row">
                     <!-- Sidebar ================================================== -->
-                    <div id="sidebar" class="span3">
+                    <div id="sidebar" class="span3" style="display: none">
                         <div class="well well-small"><a id="myCart" href="product_summary.jsp"><img src="themes/images/ico-cart.png" alt="cart">3 Items in your cart  <span class="badge badge-warning pull-right">$155.00</span></a></div>
                         <ul id="sideManu" class="nav nav-tabs nav-stacked">
                             <li class="subMenu open"><a> Indian</a>
@@ -165,9 +163,9 @@
                             <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
                             <li class="active"> SHOPPING CART</li>
                         </ul>
-                        <h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="products.html" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+                        <h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="index.jsp" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
                         <hr class="soft"/>
-                        <table class="table table-bordered">
+                        <table class="table table-bordered" style="display: none">
                             <tr><th> I AM ALREADY REGISTERED  </th></tr>
                             <tr> 
                                 <td>
@@ -207,7 +205,7 @@
                                     <th>Quantity/Update</th>
                                     <th>Price</th>
 
-                                    <th>Tax</th>
+                                    <!--<th>Tax</th>-->
                                     <th>Total</th>
                                 </tr>
                             </thead>
@@ -262,15 +260,15 @@
                             </tbody>
                         </table>
 
-                        <a href="products.html" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
-                        <button type="button" onclick="submitOrder()" class="btn btn-large pull-right">Submit <i class="icon-arrow-right"></i></button>
+                        <a href="index.jsp" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+                        <button type="button" onclick="submitOrder('<%=username%>')" class="btn btn-large pull-right">Submit <i class="icon-arrow-right"></i></button>
 
                     </div>
                 </div></div>
         </div>
         <!-- MainBody End ============================= -->
         <!-- Footer ================================================================== -->
-        <div  id="footerSection">
+        <div  id="footerSection" style="display: none">
             <div class="container">
                 <div class="row">
                     <div class="span3">
@@ -406,12 +404,12 @@
                     cartRow += "<button onclick=\"removeRow(this.parentNode)\" class=\"btn btn-danger\" type=\"button\"><i class=\"icon-remove icon-white\"></i></button>";
                     cartRow += "</div></td>";
                     cartRow += "<td>$" + cartToRender.orderdetails[i].price + "</td>";
-                    cartRow += "<td>$1.23</td>";
+                    //cartRow += "<td>$1.23</td>";
                     cartRow += "<td >$" + cartToRender.orderdetails[i].price + "</td></tr>";
                 }
-                cartRow += "<tr><td colspan=\"5\" style=\"text-align:right\">Total Price: </td><td id=\"totalvalue\"> </td></tr>";
-                cartRow += "<tr><td colspan=\"5\" style=\"text-align:right\" >Total Tax: </td><td id=\"totalTax\"> </td></tr>";
-                cartRow += "<tr><td colspan=\"5\" style=\"text-align:right\" ><strong>TOTAL =</strong></td><td id=\"totalCost\" class=\"label label-important\" style=\"display:block\"> </td></tr>";
+                cartRow += "<tr><td colspan=\"4\" style=\"text-align:right\">Total Price: </td><td id=\"totalvalue\"> </td></tr>";
+                //cartRow += "<tr><td colspan=\"4\" style=\"text-align:right\" >Total Tax: </td><td id=\"totalTax\"> </td></tr>";
+                cartRow += "<tr><td colspan=\"4\" style=\"text-align:right\" ><strong>TOTAL =</strong></td><td id=\"totalCost\" class=\"label label-important\" style=\"display:block\"> </td></tr>";
                 document.getElementById("cartGrid").innerHTML = cartRow;
             }
             renderCartGrid();

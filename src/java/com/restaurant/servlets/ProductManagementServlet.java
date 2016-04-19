@@ -72,9 +72,17 @@ public class ProductManagementServlet extends HttpServlet {
             }
             else if(requestType.equalsIgnoreCase("SearchProducts")){
                 System.out.println("Search Query ::: "+productRequestJSONObj.getString("searchQuery"));
-        
-                ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.SEARCH_QUERY, null);
-                ps.setString(1, "%"+productRequestJSONObj.getString("searchQuery")+"%");
+                String productCat = productRequestJSONObj.getString("searchCategory");
+                
+                if(productCat.equalsIgnoreCase("ALL")){
+                    ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.SEARCH_QUERY, null);
+                    ps.setString(1, "%"+productRequestJSONObj.getString("searchQuery")+"%");
+                }
+                else{
+                    ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.SEARCH_QUERY_CAT, null);
+                    ps.setString(1, "%"+productRequestJSONObj.getString("searchQuery")+"%");
+                    ps.setString(2, productCat.toUpperCase());
+                }
                 rs = QueryExecutor.executePSQuery(ps);
                 JSONArray productsArray = new JSONArray();
                 while(rs.next()){
@@ -129,7 +137,7 @@ public class ProductManagementServlet extends HttpServlet {
                      ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.SALES_BY_REGION, null);
                  }
                  else if(aggregationType.equalsIgnoreCase("MY_ORDERS")){
-                     ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.MY_ORDERS, null);
+                     ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.MY_ORDERS_VIEW, null);
                      ps.setString(1, (String)request.getSession().getAttribute("user"));
                  } 
                  rs = QueryExecutor.executePSQuery(ps);
