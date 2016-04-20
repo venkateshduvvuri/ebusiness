@@ -27,6 +27,12 @@ public class GlobalConstants {
     
     public static final String ADD_NEW_PRODUCT = "INSERT INTO PRODUCT(PRODUCT_ID,PRODUCT_NAME,PRODUCT_DESCRIPTION,INVENTORY_AMOUNT,PRODUCT_PRICE,PRODUCT_KIND,IMAGE_URL) VALUES (?,?,?,?,?,?,?)";
     
+    public static final String DELETE_PRODUCT = "DELETE FROM PRODUCT WHERE PRODUCT_ID = ?";
+    
+    public static final String GET_PRODUCT = "SELECT * FROM PRODUCT WHERE PRODUCT_ID = ?";
+    
+    public static final String UPDATE_PRODUCT = "UPDATE PRODUCT SET PRODUCT_NAME = ?,PRODUCT_DESCRIPTION = ?,PRODUCT_PRICE = ?,IMAGE_URL = ?,INVENTORY_AMOUNT = ?,PRODUCT_KIND=? WHERE PRODUCT_ID = ?";
+    
     public static final String ORDER_STATUS_PLACED = "Order Placed";
     
     public static final String ORDER_STATUS_INPROCESS = "Food is being prepared";

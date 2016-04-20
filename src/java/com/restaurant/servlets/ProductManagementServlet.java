@@ -125,6 +125,59 @@ public class ProductManagementServlet extends HttpServlet {
                 }
                 
             }
+            else if(requestType.equalsIgnoreCase("getProduct")){
+                System.out.println("Get Product ##################");
+                String productId = productRequestJSONObj.getString("productId");
+                ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.GET_PRODUCT, null);
+                ps.setString(1, productId);
+                rs = QueryExecutor.executePSQuery(ps);
+                JSONObject productJSON = new JSONObject();
+                ResultSetMetaData rsmd = rs.getMetaData();
+                int columnCount = rsmd.getColumnCount();
+                while(rs.next()){
+                    for(int i=1; i< columnCount+1; i++){
+                        productJSON.put(rsmd.getColumnLabel(i).toLowerCase(), rs.getString(rsmd.getColumnLabel(i)));
+                    }
+                }
+                out.println(productJSON.toString());
+            }
+            else if(requestType.equalsIgnoreCase("updateProduct")){
+                JSONObject updateProductJSONObj = productRequestJSONObj.getJSONObject("updateProductJSON");
+                ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.UPDATE_PRODUCT, null);
+                ps.setString(1, updateProductJSONObj.getString("product_name1"));
+                ps.setString(2, updateProductJSONObj.getString("product_description1"));
+                ps.setString(3, updateProductJSONObj.getString("product_price1"));
+                ps.setString(4, updateProductJSONObj.getString("image_url1"));
+                ps.setString(5, updateProductJSONObj.getString("inventory_amount1"));
+                ps.setString(6, updateProductJSONObj.getString("product_kind1"));
+                ps.setString(7, updateProductJSONObj.getString("product_id1"));
+                
+                if(QueryExecutor.executeQuery(ps)){
+                    System.out.println("Product Details Updated Successfully.");
+                    conn.commit();
+                    out.println("Successful");
+                }
+                else{
+                    System.out.println("Failed Updating Product Details.");
+                    conn.rollback();
+                    out.println("Failed.");
+                }
+            }
+            else if(requestType.equalsIgnoreCase("deleteProduct")){
+                String productIdToDelete = productRequestJSONObj.getString("productId");
+                ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.DELETE_PRODUCT, null);
+                ps.setString(1, productIdToDelete);
+                if(QueryExecutor.executeQuery(ps)){
+                    System.out.println("Product has been Deleted Successfully.");
+                    conn.commit();
+                    out.println("Successful");
+                }
+                else{
+                    System.out.println("Failed to Delete the Product");
+                    conn.rollback();
+                    out.println("Failed");
+                }
+            }
             else if(requestType.equalsIgnoreCase("SalesAggregate")){
                  String aggregationType = productRequestJSONObj.getString("aggregationType");
                  if(aggregationType.equalsIgnoreCase("SALES_BY_PRODUCT")){

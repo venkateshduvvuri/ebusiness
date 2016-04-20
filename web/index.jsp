@@ -223,6 +223,48 @@
                                     </form>		
                                 </div>
                             </div>
+                            
+                             <div id="updateProductdiv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 0% !important;margin-top: 5px !important;"  role="dialog" aria-labelledby="updateProductdiv" aria-hidden="false" >
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h3>Update Product</h3>
+                                </div>
+                                <div class="modal-body" style="max-height: 500px !important">
+                                    <form id="updateProductForm" action="javascript:updateProduct()" class="form-horizontal loginFrm">
+                                        <div class="control-group">								
+                                             <label for="product_id1" style="display:inline-block;vertical-align:middle;">Product ID :</label> <input type="text" pattern="[a-zA-Z0-9-]+" title="Only Enter AlphaNumeric Value" id="product_id1" style="display:inline-block;vertical-align:middle;"    placeholder="Product ID :" required="true" >
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="product_name1" style="display:inline-block;vertical-align:left;">Product Name :</label> <input  type="text"  id="product_name1" style="display:inline-block;vertical-align:right;" placeholder="Product Name" required="true">
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="product_description1" style="display:inline-block;vertical-align:left;">Product Description :</label> <input type="text" id="product_description1" style="display:inline-block;vertical-align:right;" placeholder="Product Desciption" required="true">
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="inventory_amount1" style="display:inline-block;vertical-align:middle;">Inventory Amount :</label> <input type="number" min="1" step="1" id="inventory_amount1" style="display:inline-block;vertical-align:middle;" placeholder="Inventory Amount" required="true">
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="product_price1" style="display:inline-block;vertical-align:middle;">Product Price :</label> <input type="number" step="any" min="0" id="product_price1" style="display:inline-block;vertical-align:middle;" placeholder="Product Price" required="true">
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="product_kind1" style="display:inline-block;vertical-align:middle;">Product Kind :</label> 
+                                            <select id="product_kind1">
+                                                <option value="Computer">Computer</option>
+                                                <option value="Mobile">Mobile</option>
+                                                <option value="Tablet">Tablet</option>
+                                            </select>
+                                            <!--<input type="text" id="product_kind" style="display:inline-block;vertical-align:middle;" placeholder="Product Kind" required="true">-->
+                                        </div>
+                                        <div class="control-group">
+                                            <label for="image_url1" style="display:inline-block;vertical-align:middle;">Image URL : </label> <input type="text" id="image_url1" style="display:inline-block;vertical-align:middle;" placeholder="Image URL">
+                                        </div>
+                                        <button type="submit" class="btn btn-success" >Submit</button>
+                                        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+                                    </form>		
+                                </div>
+                            </div>
+                            
+                            
                             <li class="" style="display:none"><a href="contact.html">Contact</a></li>
                             <li class="" id="logoutButton" style="display:block"><a href="#" onclick="logout()" role="button" data-toggle="modal" style="padding-right:0"><span class="btn btn-large btn-success">Logout</span></a></li>
                             <li id="loginButton" class="">
