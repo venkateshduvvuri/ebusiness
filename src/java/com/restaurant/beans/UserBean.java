@@ -17,6 +17,8 @@ import java.sql.Types;
 /**
  *
  * @author Venkatesh
+ * This Class is used to Login the user with the given username and Password Details.
+ * It Queries the Database to check if the Username and Password are valid.
  */
 public class UserBean {
     
@@ -51,7 +53,9 @@ public class UserBean {
         this.userId = userId;
     }
        
-    
+    /*
+    * Method Which Connects to the Database to check the validity of username and password
+    */
     public boolean login(){
         Connection conn = JNDIConnectionFactory.getConnectionFromJNDIPool();
         String query = GlobalConstants.USER_LOGIN_QUERY;

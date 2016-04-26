@@ -5,13 +5,13 @@
         <group>
             <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/src/java/com/restaurant/servlets/OrderRequestServlet.java</file>
             <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/src/java/com/restaurant/dbconnection/QueryExecutor.java</file>
+            <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/src/java/com/restaurant/servlets/ShoppingCartServlet.java</file>
             <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/src/java/com/restaurant/servlets/LoginServlet.java</file>
+            <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/src/java/com/restaurant/dbconnection/JNDIConnectionFactory.java</file>
             <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/web/WEB-INF/web.xml</file>
             <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/src/java/com/restaurant/servlets/RedirectServlet.java</file>
             <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/web/themes/js/script.js</file>
             <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/src/java/com/restaurant/beans/ProductDetails.java</file>
-            <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/src/java/com/restaurant/beans/UserBean.java</file>
-            <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/src/java/com/restaurant/servlets/CustomerInfoServlet.java</file>
             <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/web/META-INF/context.xml</file>
             <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/web/index.jsp</file>
             <file>file:/C:/Users/Venkatesh/Documents/NetBeansProjects/ebusiness/src/java/com/restaurant/servlets/ProductManagementServlet.java</file>

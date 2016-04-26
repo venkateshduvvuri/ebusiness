@@ -21,6 +21,8 @@ import java.util.logging.Logger;
 /**
  *
  * @author Venkatesh
+ * This Class is used to place an order request. It Encapsulates the Cart Details and Persists it to the database.
+ * It Also Creates a Thread which Updates the Order Status in the Database.
  */
 public class OrderRequest {
     
@@ -29,20 +31,32 @@ public class OrderRequest {
     private double orderAmount;
     
     private String userName;
+    
+    private int orderId;
 
+    
     public OrderRequest(List<ProductDetails> order, double orderAmount, String userName) {
         this.order = order;
         this.orderAmount = orderAmount;
         this.userName = userName;
     }
+
+    public int getOrderId() {
+        return orderId;
+    }
+
+    public void setOrderId(int orderId) {
+        this.orderId = orderId;
+    }
     
     public boolean placeOrder() throws SQLException{
-        long orderid = System.currentTimeMillis();
+        
         String[][] params = {
             {String.valueOf(Types.VARCHAR),String.valueOf(this.userName)},
             {String.valueOf(Types.DATE),""},
             {String.valueOf(Types.DOUBLE),String.valueOf(this.orderAmount)},
-            {String.valueOf(Types.VARCHAR),GlobalConstants.SALES_ID}
+            {String.valueOf(Types.VARCHAR),GlobalConstants.SALES_ID},
+            {String.valueOf(Types.VARCHAR),"1"}
         };
         Connection conn = JNDIConnectionFactory.getConnectionFromJNDIPool();
         PreparedStatement ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.ORDER_QUERY, params);
@@ -50,6 +64,7 @@ public class OrderRequest {
             ResultSet rs =  ps.getGeneratedKeys();
              rs.next();
              int orderId = rs.getInt(1);
+             this.setOrderId(orderId);
             QueryExecutor.closeObjects(null, ps, null);
             for(ProductDetails product : this.order){
                 String[][] queryParams = {
@@ -70,8 +85,8 @@ public class OrderRequest {
             System.out.println("Order has been Placed Succefully...");
             conn.commit();
             QueryExecutor.closeObjects(null, null, conn);
-            //Thread t = new Thread(new OrderUpdateThread(orderid));
-           // t.start();
+            Thread t = new Thread(new OrderUpdateThread(orderId));
+            t.start();
             return true;
         }
         else{
@@ -82,6 +97,10 @@ public class OrderRequest {
         }
     }
     
+    /*
+    * This is a dummy thread which will Update the Order Status in the DataBase. Sleep Time is 10Seconds.
+    * So After 20 Seconds, the order status will be changed to "Ready".
+    */
     class OrderUpdateThread implements Runnable{
 
         private long orderid;
@@ -96,19 +115,19 @@ public class OrderRequest {
             PreparedStatement ps1 = null ;
             try {
                 System.out.println("Order Update Thread has been initialized for the Order ::: "+this.orderid);
-                Thread.sleep(5000);
+                Thread.sleep(7000);
                 ps = QueryExecutor.getPreparedStatement(conn,GlobalConstants.UPDATE_STATUS_QUERY, new String[][]{
                     {String.valueOf(Types.VARCHAR),GlobalConstants.ORDER_STATUS_INPROCESS},
-                    {String.valueOf(Types.BIGINT),String.valueOf(this.orderid)}
+                    {String.valueOf(Types.VARCHAR),String.valueOf(this.orderid)}
                 });
-                QueryExecutor.executePSQuery(ps);
+                QueryExecutor.executeQuery(ps);
                 conn.commit();
-                Thread.sleep(5000);
+                Thread.sleep(10000);
                 ps1 = QueryExecutor.getPreparedStatement(conn, GlobalConstants.UPDATE_STATUS_QUERY, new String[][]{
                     {String.valueOf(Types.VARCHAR),GlobalConstants.ORDER_STATUS_READY},
-                    {String.valueOf(Types.BIGINT),String.valueOf(this.orderid)}
+                    {String.valueOf(Types.VARCHAR),String.valueOf(this.orderid)}
                 });
-                QueryExecutor.executePSQuery(ps1);
+                QueryExecutor.executeQuery(ps1);
                 conn.commit();
             } catch (InterruptedException ex) {
                 System.out.println("Exception Occurred in Order Update Thread for the Order ::: "+this.orderid);

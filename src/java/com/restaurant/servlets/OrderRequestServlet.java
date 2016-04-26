@@ -21,6 +21,8 @@ import org.json.JSONObject;
 /**
  *
  * @author Venkatesh
+ * This Servlet is used to place the order. The Call is passed on to the OrderRequest Class
+ * which finally persists the Order Details into the Database.
  */
 public class OrderRequestServlet extends HttpServlet {
 
@@ -41,6 +43,9 @@ public class OrderRequestServlet extends HttpServlet {
         try{
             orderJSON = new JSONObject(orderRequestJSON);
             String userId = (String)request.getSession().getAttribute("user");
+            if(userId == null  || userId.equalsIgnoreCase("")){
+                userId = "123123465";
+            }
             JSONArray orderDetailsArray = orderJSON.getJSONArray("orderdetails");
             int items = orderDetailsArray.length();
             List<ProductDetails> productsList = new ArrayList<>();
@@ -57,7 +62,7 @@ public class OrderRequestServlet extends HttpServlet {
             OrderRequest or = new OrderRequest(productsList, orderAmount, userId);
             if(or.placeOrder()){
                 System.out.println("Order has been Placed Succefully...");
-                out.println("Successful");
+                out.println(or.getOrderId());
             }
         }
         catch(Exception ex){

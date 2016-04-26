@@ -18,6 +18,8 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author Venkatesh
+ * This is the Servlet the redirects the call to index.jsp after launching the application
+ * It checks for existing Cookies in the HTTP Request and sets them as session attributes for Consequent Use
  */
 public class RedirectServlet extends HttpServlet {
 
@@ -53,7 +55,7 @@ public class RedirectServlet extends HttpServlet {
                 }
             }
         }
-
+       // request.getRequestDispatcher("index.jsp").forward(request, response);
         response.sendRedirect("index.jsp");
     }
 

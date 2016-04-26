@@ -23,6 +23,8 @@ import org.json.JSONObject;
 /**
  *
  * @author Venkatesh
+ * This Servlet is used to Login into the application. It also sets the Login information 
+ * and Cart information in the Cookies which can be used later.
  */
 public class LoginServlet extends HttpServlet {
 

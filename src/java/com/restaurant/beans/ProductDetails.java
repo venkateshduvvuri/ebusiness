@@ -8,6 +8,7 @@ package com.restaurant.beans;
 /**
  *
  * @author Venkatesh
+ * This is a Bean which Contains the Product Name, Product Id, Quantity and Price.
  */
 public class ProductDetails {
     

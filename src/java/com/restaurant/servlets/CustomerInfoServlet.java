@@ -24,6 +24,8 @@ import org.json.JSONObject;
 /**
  *
  * @author Venkatesh
+ * This Servlet is used to Maintain the Customer Information in the Database.
+ * All the Operations on the Customer Table are handled by this Servlet.
  */
 public class CustomerInfoServlet extends HttpServlet {
 

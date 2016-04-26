@@ -15,6 +15,9 @@ import javax.sql.DataSource;
 /**
  *
  * @author Venkatesh
+ * This Class is used to Initialize the JNDI Connection Pool on Server Startup.
+ * The initializeDataSource Method is called in the init Method of the LoginServlet
+ * So, the static Variable JNDIDataSource is initialized and used.
  */
 public class JNDIConnectionFactory {
     
@@ -43,7 +46,9 @@ public class JNDIConnectionFactory {
         }
         return true;
     }
-    
+    /*
+    * This Method is used to return a Connection Object from the JNDI Connection Pool
+    */
     public static Connection getConnectionFromJNDIPool(){
         try{
            Connection conn = JNDIDataSource.getConnection();

@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-        <title>Bootshop online Shopping cart</title>
+        <title>The Diner Cafe</title>
         <script type = "text/javascript" >
             history.pushState(null, null, 'product_summary.jsp');
             window.addEventListener('popstate', function (event) {
@@ -24,6 +24,29 @@
         <script src="themes/js/less.js" type="text/javascript"></script> -->
 
         <!-- Bootstrap style --> 
+        <style>
+            
+            #myProgress {
+                position: relative;
+                width: 100%;
+                height: 30px;
+                background-color: #ddd;
+            }
+
+            #myBar {
+                position: absolute;
+                width: 33%;
+                height: 100%;
+                background-color: #4CAF50;
+            }
+            
+            #mylabel {
+                text-align: center;
+                line-height: 30px;
+                font-size: 25px;
+                color: white;
+            }
+        </style>
         <link id="callCss" rel="stylesheet" href="themes/bootshop/bootstrap.min.css" media="screen"/>
         <link href="themes/css/base.css" rel="stylesheet" media="screen"/>
         <!-- Bootstrap style responsive -->	
@@ -68,14 +91,14 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index.jsp"><img src="themes/images/logo.png" alt="Bootsshop"/></a>
-                        <form class="form-inline navbar-search" method="post" action="products.html" >
+                        <a class="brand" href="index.jsp"><img src="themes/images/4.gif" alt="Bootsshop"/></a>
+                        <form class="form-inline navbar-search" method="post" action="" >
                             <input id="srchFld" class="srchTxt" type="text" />
                             <select class="srchTxt">
                                  <option>ALL</option>
-                                <option>Computer</option>
-                                <option>Mobile</option>
-                                <option>Tablet</option>
+                                <option>Indian</option>
+                                <option>Chinese</option>
+                                <option>Mexican</option>
                             </select> 
                             <button type="submit" id="submitButton" class="btn btn-primary">Go</button>
                         </form>
@@ -163,7 +186,12 @@
                             <li><a href="index.jsp">Home</a> <span class="divider">/</span></li>
                             <li class="active"> SHOPPING CART</li>
                         </ul>
-                        <h3>  SHOPPING CART [ <small>3 Item(s) </small>]<a href="index.jsp" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Shopping </a></h3>	
+                        <div id="myProgress" style="display:none">
+                            <div id="myBar">
+                                <div id="mylabel">Order Placed!</div>
+                            </div>
+                        </div>
+                        <h3>  SHOPPING CART <a href="index.jsp" class="btn btn-large pull-right"><i class="icon-arrow-left"></i> Continue Ordering </a></h3>	
                         <hr class="soft"/>
                         <table class="table table-bordered" style="display: none">
                             <tr><th> I AM ALREADY REGISTERED  </th></tr>
@@ -260,7 +288,7 @@
                             </tbody>
                         </table>
 
-                        <a href="index.jsp" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Shopping </a>
+                        <a href="index.jsp" class="btn btn-large"><i class="icon-arrow-left"></i> Continue Ordering </a>
                         <button type="button" onclick="submitOrder('<%=username%>')" class="btn btn-large pull-right">Submit <i class="icon-arrow-right"></i></button>
 
                     </div>
@@ -375,7 +403,7 @@
                 document.getElementById("loginButton").style.display = "block";
                 document.getElementById("logoutButton").style.display = "none";
             } else if (username === "admin") {
-                document.getElementById("productMaintenance").style.display = "block";
+                //document.getElementById("productMaintenance").style.display = "block";
                 document.getElementById("loginButton").style.display = "none";
                 document.getElementById("logoutButton").style.display = "block";
                 document.getElementById("userHeader").innerHTML = "Welcome!<strong> Administrator</strong>";
@@ -426,7 +454,52 @@
 
                 flushCart();
             });
-        </script>
+            function move(orderId) {
+                 var orderId = orderId;
+                 var elem = document.getElementById("myBar");   
+                 document.getElementById("myProgress").style.display = "block";
+                 var width = 33;
+                 var id = setInterval(frame, 7000);
+                    
+                 function frame() {
+                    var XHR = createXMLHttpRequest();
+                    var productRequestJSON = {
+                       "requestType": "OrderStatus",
+                       "orderId" : orderId
+                    };
+                    XHR.onreadystatechange = function () {
+                        if (XHR.readyState == 4) {
+                            if (XHR.status == 200) {
+                                var response = XHR.responseText;
+                                response = response.toString();
+                                console.log("Response Received...");
+                                console.log(response);
+                                if(response == "1" || response == 1){
+                                    width = 33;
+                                    elem.style.width = width + '%'; 
+                                    document.getElementById("mylabel").innerHTML = 'Order Placed!';
+                                }
+                                else if (response == "2" || response == 2) {
+                                    width = 66;
+                                    elem.style.width = width + '%';
+                                    document.getElementById("mylabel").innerHTML = 'Food is being Prepared. Please Wait!';
+                                } else if (response == "3" || response == 3){
+                                    width = 100; 
+                                    elem.style.width = width + '%'; 
+                                    document.getElementById("mylabel").innerHTML = 'Your Food is Ready! Will be Served. Enjoy!';
+                                    clearInterval(id);
+                                }
+                            }
+                        }
+                    };
+
+                    XHR.open("POST", "ProductManagementServlet", true);
+                    XHR.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                    XHR.send("productRequestJSON=" + escape(JSON.stringify(productRequestJSON)));
+                   
+                 }
+            }
+          </script>
 
         <span id="themesBtn"></span>
     </body>

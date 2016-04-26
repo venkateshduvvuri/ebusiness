@@ -17,6 +17,7 @@ import org.json.JSONObject;
 /**
  *
  * @author Venkatesh
+ * This Class is used to Maintain the Shopping Cart Both in Session and Cookies
  */
 public class ShoppingCartServlet extends HttpServlet {
 

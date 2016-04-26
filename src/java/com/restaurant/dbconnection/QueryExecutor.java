@@ -16,6 +16,8 @@ import java.sql.Types;
 /**
  *
  * @author Venkatesh
+ * This Class is Generic Query Executor. It is Designed to Execute 
+ * Prepredstatements and close Connection Related Objects after they are used.
  */
 public class QueryExecutor {
     

@@ -25,6 +25,8 @@ import org.json.JSONObject;
 /**
  *
  * @author Venkatesh
+ * This Class is used to Manage the Product Details in the Database.
+ * All Kinds of Operations on the Product Table are Handled by this Servlet
  */
 public class ProductManagementServlet extends HttpServlet {
 
@@ -220,6 +222,15 @@ public class ProductManagementServlet extends HttpServlet {
                  aggregateJSONArray.put(colValuesJSON);
                  out.println(aggregateJSONArray.toString());
                  System.out.println(aggregateJSONArray.toString());
+            }
+            else if(requestType.equalsIgnoreCase("OrderStatus")){
+                String orderId = productRequestJSONObj.getString("orderId");
+                ps = QueryExecutor.getPreparedStatement(conn, GlobalConstants.ORDER_STATUS_QUERY, null);
+                ps.setString(1, orderId);
+                rs = QueryExecutor.executePSQuery(ps);
+                while(rs.next()){
+                    out.println(rs.getString(1));
+                }
             }
         }
         catch(Exception ex){

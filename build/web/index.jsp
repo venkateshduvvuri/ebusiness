@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html" charset="utf-8">
-        <title>MiaCucina Order Food Online</title>
+        <title>The Diner Cafe</title>
         <meta http-equiv="Pragma" content="no-cache">
         <meta http-equiv="Cache-Control" content="no-cache">
         <meta http-equiv="Expires" content="0">
@@ -64,14 +64,14 @@
                         <span class="icon-bar"></span>
                     </a>
                     <div class="navbar-inner">
-                        <a class="brand" href="index.jsp"><img src="themes/images/logo.png" alt="Bootsshop" height="20"/></a>
+                        <a class="brand" href="index.jsp"><img src="themes/images/4.gif" alt="Bootsshop" height="20"/></a>
                         <form class="form-inline navbar-search" method="post">
                             <input id="srchFld" class="srchTxt" type="text" >
                             <select class="srchTxt" id="searchCat">
                                 <option>ALL</option>
-                                <option>Computer</option>
-                                <option>Mobile</option>
-                                <option>Tablet</option>
+                                <option>Indian</option>
+                                <option>Chinese</option>
+                                <option>Mexican</option>
 
                             </select> 
                             <button type="button" id="submitButton" class="btn btn-primary" onclick="search()" >Go</button>
@@ -99,34 +99,6 @@
                                      <button type="submit" class="btn btn-success" onclick="salesAggregate('CATEGORY_TOP','aggregationTable')">Top Cat</button>
                                      <button type="submit" class="btn btn-success" onclick="salesAggregate('SALES_BY_REGION','aggregationTable')">Region Sales</button>
                         <table class="table table-bordered" id="aggregationTable">
-                            <!--<thead>
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Description</th>
-                                    <th>Quantity/Update</th>
-                                </tr>
-                            </thead>
-                            <tbody id="aggregationValues">
-                                <tr>
-                                    <td>$120.00</td>
-
-                                    <td>$15.23</td>
-                                    <td >$120.00</td>
-                                </tr>
-                                <tr>
-                                    <td>$7.00</td>
-
-                                    <td>$1.00</td>
-                                    <td >$7.00</td>
-                                </tr>
-                                <tr>
-                                    <td>$120.00</td>
-
-                                    <td>$15.00</td>
-                                    <td >$120.00</td>
-                                </tr>
-
-                            </tbody>-->
                         </table>
                                 </div>
                             </div>
@@ -162,20 +134,20 @@
                                         <div class="control-group">
                                             <label for="address_zipcode" style="display:inline-block;vertical-align:middle;">ZIP Code :</label> <input type="text" id="address_zipcode" pattern="[0-9]+" style="display:inline-block;vertical-align:middle;" placeholder="ZIP Code" required="true">
                                         </div>
-                                        <div class="control-group">
+                                        <div class="control-group" style="display: none">
                                             <label for="customer_kind" style="display:inline-block;vertical-align:middle;">Customer Kind :</label>
                                             <select id="customer_kind" onchange="home_business(this)">
                                                     <option selected="selected" value="Home">Home</option>
                                                     <option  value="Business">Business</option>
                                             </select>
                                         </div>
-                                        <div class="control-group" id="id_home_business" style="display: block">
+                                        <div class="control-group" id="id_home_business" style="display: none">
                                             <label for="marriage_status" style="display:inline-block;vertical-align:middle;">Marriage Status :</label>
                                              <select id="marriage_status" ><option selected="selected" value="Married">Married</option><option  value="Unmarried">Unmarried</option> <option  value="Widowed">Widowed</option><option  value="Separated">Separated</option></select>
                                               <label for="gender" style="display:inline-block;vertical-align:middle;">Gender :</label>
                                                <select id="gender"><option value="Male">Male</option><option value="Female">Female</option></select>
-                                                <label for="age" style="display:inline-block;vertical-align:middle;">Age :</label> <input type="number" id="age" min="1" step="1" style="display:inline-block;vertical-align:middle;" placeholder="Age" required="true">
-                                                <label for="income" style="display:inline-block;vertical-align:middle;">Income :</label> <input type="number" id="income" step="any" min="1" style="display:inline-block;vertical-align:middle;" placeholder="Income" required="true">
+                                                <label for="age" style="display:inline-block;vertical-align:middle;">Age :</label> <input type="hidden" value="25" id="age" min="1" step="1" style="display:inline-block;vertical-align:middle;" placeholder="Age" >
+                                                <label for="income" style="display:inline-block;vertical-align:middle;">Income :</label> <input type="hidden" id="income" value="10000" step="any" min="1" style="display:inline-block;vertical-align:middle;" placeholder="Income" >
                                        </div>
 
                                         <button type="submit" class="btn btn-success" >Submit</button>
@@ -183,35 +155,35 @@
                                     </form>		
                                 </div>
                             </div>
-                            <li id="productMaintenance" class="" style="display:none" ><a href="#productMaintenancediv" style="color: #fff" role="button" data-toggle="modal" >New Product</a></li>
+                            <li id="productMaintenance" class="" style="display:none" ><a href="#productMaintenancediv" style="color: #fff" role="button" data-toggle="modal" >New Dish</a></li>
                             <div id="productMaintenancediv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 0% !important;margin-top: 5px !important;"  role="dialog" aria-labelledby="productMaintenancediv" aria-hidden="false" >
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Add New Product</h3>
+                                    <h3>Add New Dish</h3>
                                 </div>
                                 <div class="modal-body" style="max-height: 500px !important">
                                     <form id="addProductForm" action="javascript:addNewProduct()" class="form-horizontal loginFrm">
                                         <div class="control-group">								
-                                             <label for="product_id" style="display:inline-block;vertical-align:middle;">Product ID :</label> <input type="text" pattern="[a-zA-Z0-9-]+" title="Only Enter AlphaNumeric Value" id="product_id" style="display:inline-block;vertical-align:middle;"    placeholder="Product ID :" required="true" >
+                                             <label for="product_id" style="display:inline-block;vertical-align:middle;">ID :</label> <input type="text" pattern="[a-zA-Z0-9-]+" title="Only Enter AlphaNumeric Value" id="product_id" style="display:inline-block;vertical-align:middle;"    placeholder="ID :" required="true" >
                                         </div>
                                         <div class="control-group">
-                                            <label for="product_name" style="display:inline-block;vertical-align:left;">Product Name :</label> <input  type="text"  id="product_name" style="display:inline-block;vertical-align:right;" placeholder="Product Name" required="true">
+                                            <label for="product_name" style="display:inline-block;vertical-align:left;">Name :</label> <input  type="text"  id="product_name" style="display:inline-block;vertical-align:right;" placeholder="Name" required="true">
                                         </div>
                                         <div class="control-group">
-                                            <label for="product_description" style="display:inline-block;vertical-align:left;">Product Description :</label> <input type="text" id="product_description" style="display:inline-block;vertical-align:right;" placeholder="Product Desciption" required="true">
+                                            <label for="product_description" style="display:inline-block;vertical-align:left;">Description :</label> <input type="text" id="product_description" style="display:inline-block;vertical-align:right;" placeholder="Description" required="true">
+                                        </div>
+                                        <div class="control-group" style="display: none">
+                                            <label for="inventory_amount" style="display:inline-block;vertical-align:middle;">Inventory Amount :</label> <input type="hidden" value="1000" min="1" step="1" id="inventory_amount" style="display:inline-block;vertical-align:middle;" placeholder="Inventory Amount" >
                                         </div>
                                         <div class="control-group">
-                                            <label for="inventory_amount" style="display:inline-block;vertical-align:middle;">Inventory Amount :</label> <input type="number" min="1" step="1" id="inventory_amount" style="display:inline-block;vertical-align:middle;" placeholder="Inventory Amount" required="true">
+                                            <label for="product_price" style="display:inline-block;vertical-align:middle;">Price :</label> <input type="number" step="any" min="0" id="product_price" style="display:inline-block;vertical-align:middle;" placeholder="Price" required="true">
                                         </div>
                                         <div class="control-group">
-                                            <label for="product_price" style="display:inline-block;vertical-align:middle;">Product Price :</label> <input type="number" step="any" min="0" id="product_price" style="display:inline-block;vertical-align:middle;" placeholder="Product Price" required="true">
-                                        </div>
-                                        <div class="control-group">
-                                            <label for="product_kind" style="display:inline-block;vertical-align:middle;">Product Kind :</label> 
+                                            <label for="product_kind" style="display:inline-block;vertical-align:middle;">Dish Style :</label> 
                                             <select id="product_kind">
-                                                <option value="Computer">Computer</option>
-                                                <option value="Mobile">Mobile</option>
-                                                <option value="Tablet">Tablet</option>
+                                                <option value="Indian">Indian</option>
+                                                <option value="Mexican">Mexican</option>
+                                                <option value="Chinese">Chinese</option>
                                             </select>
                                             <!--<input type="text" id="product_kind" style="display:inline-block;vertical-align:middle;" placeholder="Product Kind" required="true">-->
                                         </div>
@@ -227,31 +199,31 @@
                              <div id="updateProductdiv" class="modal hide fade in" tabindex="-1" style="width:700px;top: 0% !important;margin-top: 5px !important;"  role="dialog" aria-labelledby="updateProductdiv" aria-hidden="false" >
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                    <h3>Update Product</h3>
+                                    <h3>Update Dish</h3>
                                 </div>
                                 <div class="modal-body" style="max-height: 500px !important">
                                     <form id="updateProductForm" action="javascript:updateProduct()" class="form-horizontal loginFrm">
                                         <div class="control-group">								
-                                             <label for="product_id1" style="display:inline-block;vertical-align:middle;">Product ID :</label> <input type="text" pattern="[a-zA-Z0-9-]+" title="Only Enter AlphaNumeric Value" id="product_id1" style="display:inline-block;vertical-align:middle;"    placeholder="Product ID :" required="true" >
+                                             <label for="product_id1" style="display:inline-block;vertical-align:middle;">Product ID :</label> <input type="text" pattern="[a-zA-Z0-9-]+" title="Only Enter AlphaNumeric Value" id="product_id1" style="display:inline-block;vertical-align:middle;"    placeholder=" ID :" required="true" >
                                         </div>
                                         <div class="control-group">
-                                            <label for="product_name1" style="display:inline-block;vertical-align:left;">Product Name :</label> <input  type="text"  id="product_name1" style="display:inline-block;vertical-align:right;" placeholder="Product Name" required="true">
+                                            <label for="product_name1" style="display:inline-block;vertical-align:left;">Product Name :</label> <input  type="text"  id="product_name1" style="display:inline-block;vertical-align:right;" placeholder=" Name" required="true">
                                         </div>
                                         <div class="control-group">
-                                            <label for="product_description1" style="display:inline-block;vertical-align:left;">Product Description :</label> <input type="text" id="product_description1" style="display:inline-block;vertical-align:right;" placeholder="Product Desciption" required="true">
+                                            <label for="product_description1" style="display:inline-block;vertical-align:left;">Product Description :</label> <input type="text" id="product_description1" style="display:inline-block;vertical-align:right;" placeholder=" Desciption" required="true">
                                         </div>
-                                        <div class="control-group">
+                                        <div class="control-group" style="display: none">
                                             <label for="inventory_amount1" style="display:inline-block;vertical-align:middle;">Inventory Amount :</label> <input type="number" min="1" step="1" id="inventory_amount1" style="display:inline-block;vertical-align:middle;" placeholder="Inventory Amount" required="true">
                                         </div>
                                         <div class="control-group">
                                             <label for="product_price1" style="display:inline-block;vertical-align:middle;">Product Price :</label> <input type="number" step="any" min="0" id="product_price1" style="display:inline-block;vertical-align:middle;" placeholder="Product Price" required="true">
                                         </div>
-                                        <div class="control-group">
+                                        <div class="control-group" >
                                             <label for="product_kind1" style="display:inline-block;vertical-align:middle;">Product Kind :</label> 
                                             <select id="product_kind1">
-                                                <option value="Computer">Computer</option>
-                                                <option value="Mobile">Mobile</option>
-                                                <option value="Tablet">Tablet</option>
+                                                <option value="Indian">Indian</option>
+                                                <option value="Chinese">Chinese</option>
+                                                <option value="Mexican">Mexican</option>
                                             </select>
                                             <!--<input type="text" id="product_kind" style="display:inline-block;vertical-align:middle;" placeholder="Product Kind" required="true">-->
                                         </div>
@@ -272,7 +244,7 @@
                                 <div id="login" class="modal hide fade in" tabindex="-1" role="dialog" aria-labelledby="login" aria-hidden="false" >
                                     <div class="modal-header">
                                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                                        <h3>Login Block</h3>
+                                        <h3>Login </h3>
                                     </div>
                                     <div class="modal-body">
                                         <form id="loginForm" class="form-horizontal loginFrm">
@@ -550,7 +522,7 @@
                     document.getElementById("productMaintenance").style.display = "block";
                     document.getElementById("loginButton").style.display = "none";
                     document.getElementById("logoutButton").style.display = "block";
-                    document.getElementById("aggregationDialog").style.display = "block";
+                   // document.getElementById("aggregationDialog").style.display = "block";
                     document.getElementById("userHeader").innerHTML = "Welcome!<strong> Administrator</strong>";
                 } else {
                     document.getElementById("loginButton").style.display = "none";
